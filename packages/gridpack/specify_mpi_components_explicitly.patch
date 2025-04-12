@@ -1,0 +1,13 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 2fc1153a..f72336ed 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -148,7 +148,7 @@ add_custom_target(external_build
+ # MPI compiler
+ # -------------------------------------------------------------
+ message(STATUS "Checking MPI ...")
+-find_package (MPI REQUIRED)
++find_package (MPI REQUIRED COMPONENTS C CXX)
+ include_directories(AFTER ${MPI_CXX_INCLUDE_PATH})
+ 
+ #if (ENABLE_CRAY_BUILD)
