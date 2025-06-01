@@ -18,8 +18,6 @@ class Gridpack(CMakePackage):
 
     version("master", sha256="90faaea85a27b4e365725b7b97775f1fb550dcdd4596a24c1ce0c16d4cb5297f")
 
-    patch("specify_mpi_components_explicitly.patch")
-
     variant("shared", default=False, description="Build dynamically linked libraries")
     variant("tests", default=False, description="Enable build of unit tests")
     variant(
@@ -42,8 +40,10 @@ class Gridpack(CMakePackage):
     depends_on("boost+mpi+serialization+random+filesystem+system")
     depends_on("globalarrays+cxx")
     depends_on("mpi")
+    depends_on("petsc+metis+suite-sparse")
+
+    # https://github.com/GridOPTICS/GridPACK/blob/03d41de9114e4781f1c6ac42ee0410822a0c8a4e/docs/markdown/required/PARMETIS.md?plain=1#L21
     depends_on("parmetis@4:")
-    depends_on("petsc+metis+suite-sparse+superlu-dist")
 
     root_cmakelists_dir = "src"
 
@@ -51,8 +51,9 @@ class Gridpack(CMakePackage):
         return [
             self.define("Boost_ROOT:", self.spec["boost"].prefix),
             self.define("GA_DIR", self.spec["globalarrays"].prefix),
+            self.define("MPI_C_COMPILER", self.spec["mpi"].mpicc),
+            self.define("MPI_CXX_COMPILER", self.spec["mpi"].mpicxx),
             self.define("PETSC_DIR", self.spec["petsc"].prefix),
-            self.define("MPI_HOME", self.spec["mpi"].prefix),
             self.define_from_variant("BUILD_SHARED_LIBS", "shared"),
             self.define_from_variant("GRIDPACK_ENABLE_TESTS", "tests"),
             self.define_from_variant("GRIDPACK_TEST_TIMEOUT", "test_timeout"),
