@@ -1,14 +1,16 @@
+from spack_repo.builtin.build_systems.cmake import CMakePackage
+
 from spack.package import *
 
 
 class Gridpack(CMakePackage):
-    """GridPACK is an open-source high-performance (HPC) package for simulation of large-scale
-    electrical grids.  Powered by distributed (parallel) computing and high-performance numerical
-    solvers, GridPACK offers several applications forfast simulation of electrical transmission
-    systems.  It includes a number of prebuilt applications that can be directly used, the most
-    commonly used and well-developed of which are AC Power Flow, Dynamics Simulation, and
-    Contingency Analysis.  Other applications that are under development or not fully featured yet
-    include Dynamic Security Assessment and State Estimation.
+    """GridPACK is an open-source HPC package for simulation of large-scale electrical grids.
+    Powered by distributed (parallel) computing and high-performance numerical solvers, it offers
+    several applications for fast simulation of electrical transmission systems, as well as the
+    building blocks for developing custom simulation applications.  The most mature and commonly
+    used of the pre-built applications include the AC Power Flow, Dynamics Simulation, and
+    Contingency Analysis applications.  Notable among other applications, which are not yet fully
+    featured, are Dynamic Security Assessment and State Estimation.
     """
 
     homepage = "https://gridpack.pnnl.gov"
