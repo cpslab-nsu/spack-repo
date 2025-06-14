@@ -1,0 +1,14 @@
+diff --git a/Makefile b/Makefile
+index aa874b9..8062814 100644
+--- a/Makefile
++++ b/Makefile
+@@ -107,3 +107,9 @@ clean:
+ 	rm -f *.o
+ 	rm -f *.a
+ 	rm -rf .certs
++
++.PHONY: install
++install:
++	install -d "$(DESTDIR)/include/" "$(DESTDIR)/lib/"
++	install -m 644 src/libusockets.h "$(DESTDIR)/include/"
++	install -m 755 uSockets.a "$(DESTDIR)/lib/"
